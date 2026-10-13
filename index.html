@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rendyarga Oktavianta — Portofolio</title>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #c8a97e;
+      --card: #ffffff;
+      --line: rgba(0, 0, 0, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 245, 242, 0.8);
+      z-index: 100;
+    }
+    .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+    .logo span { color: var(--accent); }
+    nav ul { display: flex; gap: 28px; list-style: none; }
+    nav a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.85rem; transition: color 0.3s ease;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 0 40px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.03em; margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+    .hero p {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-block; padding: 14px 32px;
+      background: var(--text); color: var(--bg);
+      text-decoration: none; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 500;
+      transition: transform 0.3s ease, background 0.3s ease;
+      width: fit-content;
+    }
+    .btn:hover { transform: translateY(-3px); background: var(--accent); }
+
+    /* SECTION */
+    section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.8rem; color: var(--accent);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 12px; font-weight: 500;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 50px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 1.6fr;
+      gap: 48px; align-items: start;
+    }
+    .about-photo-wrap { position: relative; width: 220px; height: 220px; }
+    .about-photo-wrap::before {
+      content: ''; position: absolute; inset: -10px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+      opacity: 0.25; z-index: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .about-photo-wrap:hover::before { opacity: 0.5; transform: rotate(4deg); }
+    .about-photo {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      border-radius: 24px; overflow: hidden;
+      background: var(--card); border: 1px solid var(--line);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .about-photo-wrap:hover .about-photo {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+    }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-photo .fallback {
+      display: none; width: 100%; height: 100%;
+      align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--accent); background: var(--bg);
+    }
+    .cv-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 20px; padding: 10px 22px;
+      border-radius: 50px; background: var(--card);
+      color: var(--text); font-size: 0.82rem; font-weight: 500;
+      text-decoration: none; border: 1px solid var(--line);
+      transition: all 0.3s ease;
+    }
+    .cv-btn:hover {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff; transform: translateY(-3px);
+    }
+    .about-grid .highlight {
+      font-size: 1.05rem; color: var(--text);
+      font-weight: 500; line-height: 1.5; padding-top: 8px;
+    }
+    .about-grid p { color: var(--muted); margin-bottom: 18px; }
+
+    /* PROJECTS */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      border-radius: 20px; overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer; position: relative;
+      background: var(--card); display: flex; flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.1);
+    }
+    .card-image {
+      width: 100%; height: 200px; overflow: hidden;
+      position: relative; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform 0.6s ease;
+    }
+    .card:hover .card-image img { transform: scale(1.06); }
+    .card-image .fallback {
+      display: none; width: 100%; height: 100%;
+      align-items: center; justify-content: center;
+      font-size: 2.5rem; color: var(--accent);
+      background: linear-gradient(135deg, #f0ebe5 0%, #e0d5c5 100%);
+    }
+    .card-body {
+      padding: 28px 32px 32px; display: flex;
+      flex-direction: column; flex: 1;
+      background: var(--card); transition: background 0.3s ease;
+    }
+    .card.bg-cream .card-body { background: #faf6f0; }
+    .card.bg-sage  .card-body { background: #eef3ed; }
+    .card.bg-blue  .card-body { background: #eef2f7; }
+    .card.bg-pink  .card-body { background: #f8eef0; }
+    .card.bg-dark  .card-body { background: #1a1a1a; }
+    .card.bg-dark  .card-body h3 { color: #f7f5f2; }
+    .card.bg-dark  .card-body p { color: #a8a8a8; }
+    .card.bg-dark  .tag { background: rgba(255,255,255,0.1); color: #d0d0d0; }
+
+    .card-num {
+      font-size: 0.75rem; color: var(--accent);
+      font-weight: 600; margin-bottom: 12px;
+    }
+    .card h3 {
+      font-size: 1.25rem; font-weight: 600;
+      letter-spacing: -0.01em; margin-bottom: 10px;
+    }
+    .card p {
+      color: var(--muted); font-size: 0.92rem;
+      margin-bottom: 22px; flex: 1;
+    }
+    .card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.72rem; padding: 6px 12px;
+      background: rgba(0,0,0,0.05); border-radius: 50px;
+      color: var(--muted);
+    }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 72px minmax(120px, 140px) 1fr;
+      gap: 28px; padding: 32px 0;
+      border-top: 1px solid var(--line);
+      transition: padding-left 0.3s ease;
+      align-items: start; position: relative;
+    }
+    .timeline-item:last-child { border-bottom: 1px solid var(--line); }
+    .timeline-item:hover { padding-left: 12px; }
+    .timeline-photo {
+      width: 72px; height: 72px; border-radius: 16px;
+      overflow: hidden; background: var(--card);
+      border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: transform 0.3s ease;
+    }
+    .timeline-item:hover .timeline-photo { transform: scale(1.05); }
+    .timeline-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .timeline-photo .fallback {
+      font-size: 1.6rem; color: var(--accent); font-weight: 700;
+    }
+    .timeline-year {
+      font-size: 0.85rem; color: var(--accent);
+      font-weight: 500; padding-top: 4px;
+    }
+    .timeline-content h3 {
+      font-size: 1.15rem; font-weight: 600; margin-bottom: 6px;
+    }
+    .timeline-content .place {
+      font-size: 0.9rem; color: var(--muted); margin-bottom: 10px;
+    }
+    .timeline-content p { font-size: 0.92rem; color: var(--muted); }
+
+    .timeline-item.clickable { cursor: pointer; }
+    .timeline-item.clickable::after {
+      content: 'Klik untuk detail →';
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.72rem; color: var(--accent);
+      opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none; white-space: nowrap;
+    }
+    .timeline-item.clickable:hover::after { opacity: 1; }
+
+    /* HOBBY */
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .hobby-card {
+      background: var(--card); border-radius: 18px;
+      padding: 28px 24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--line);
+    }
+    .hobby-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.05);
+    }
+    .hobby-icon {
+      font-size: 1.6rem; margin-bottom: 14px; display: block;
+    }
+    .hobby-card h4 {
+      font-size: 1rem; font-weight: 600; margin-bottom: 6px;
+    }
+    .hobby-card p {
+      font-size: 0.85rem; color: var(--muted);
+    }
+
+    /* HOBBY CARD YANG BISA DIPENCET UNTUK PUTAR VIDEO */
+    .hobby-card.playable {
+      cursor: pointer;
+      position: relative;
+    }
+    .hobby-card.playable::after {
+      content: 'Klik untuk putar →';
+      position: absolute;
+      bottom: 10px; right: 16px;
+      font-size: 0.68rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .hobby-card.playable:hover::after { opacity: 1; }
+
+    .hobby-card.playable.playing .hobby-icon {
+      display: inline-block;
+      animation: spinIcon 3s linear infinite;
+    }
+    @keyframes spinIcon {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* CONTACT */
+    .contact {
+      text-align: center; padding: 120px 40px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .contact h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px;
+    }
+    .contact h2 em { font-style: italic; font-weight: 400; color: var(--accent); }
+    .contact > p { color: var(--muted); margin-bottom: 40px; }
+    .contact-links {
+      display: flex; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .contact-links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px; border-radius: 50px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      background: var(--card); color: var(--text);
+      border: 1px solid var(--line);
+      transition: all 0.3s ease;
+    }
+    .contact-links a:hover {
+      background: var(--text); color: var(--bg);
+      transform: translateY(-3px);
+    }
+    .contact-links a.primary {
+      background: var(--text); color: var(--bg);
+      border-color: var(--text);
+    }
+    .contact-links a.primary:hover {
+      background: var(--accent); border-color: var(--accent);
+    }
+
+    footer {
+      text-align: center; padding: 40px;
+      font-size: 0.85rem; color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    /* ANIMASI FADE-IN */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    /* LIGHTBOX (PROJECT) */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px; opacity: 0; visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 999; cursor: zoom-out;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox-img {
+      max-width: 90vw; max-height: 85vh;
+      border-radius: 16px;
+      transform: scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: block;
+    }
+    .lightbox.open .lightbox-img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute; top: 24px; right: 28px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff; font-size: 1.4rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .lightbox-close:hover {
+      background: var(--accent); transform: rotate(90deg);
+    }
+    .lightbox-caption {
+      position: absolute; bottom: 32px;
+      left: 50%; transform: translateX(-50%);
+      color: #fff; font-size: 0.9rem; opacity: 0.7;
+    }
+
+    /* EXPERIENCE MODAL */
+    .exp-modal {
+      position: fixed; inset: 0;
+      background: rgba(10, 10, 10, 0.75);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 24px; opacity: 0; visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 998; cursor: pointer;
+    }
+    .exp-modal.open { opacity: 1; visibility: visible; }
+    .exp-modal-box {
+      background: var(--card); border-radius: 24px;
+      max-width: 620px; width: 100%;
+      max-height: 85vh; overflow-y: auto;
+      padding: 44px 44px 40px; position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: default;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+    }
+    .exp-modal.open .exp-modal-box { transform: translateY(0) scale(1); }
+    .exp-modal-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line); color: var(--text);
+      font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+      z-index: 2;
+    }
+    .exp-modal-close:hover {
+      background: var(--accent); color: #fff; transform: rotate(90deg);
+    }
+    .exp-modal-photo {
+      width: calc(100% + 88px);
+      margin: -44px -44px 24px -44px;
+      border-radius: 24px 24px 0 0;
+      overflow: hidden; background: var(--bg);
+      aspect-ratio: 16 / 9;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .exp-modal-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .exp-modal-photo .photo-fallback {
+      display: none; width: 100%; height: 100%;
+      align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--accent);
+      background: linear-gradient(135deg, #f0ebe5 0%, #e0d5c5 100%);
+    }
+    .exp-modal-year {
+      font-size: 0.8rem; color: var(--accent);
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .exp-modal-box h3 {
+      font-size: 1.6rem; font-weight: 700;
+      margin-bottom: 8px; line-height: 1.2;
+    }
+    .exp-modal-place {
+      font-size: 0.95rem; color: var(--muted);
+      margin-bottom: 24px; padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .exp-modal-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 18px; }
+    .exp-modal-list { list-style: none; padding: 0; margin-top: 20px; }
+    .exp-modal-list li {
+      position: relative; padding-left: 24px;
+      margin-bottom: 12px; color: var(--muted); font-size: 0.92rem;
+    }
+    .exp-modal-list li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+
+    /* VIDEO MODAL (YOUTUBE) */
+    .video-modal {
+      position: fixed; inset: 0;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 24px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 1000; cursor: pointer;
+    }
+    .video-modal.open { opacity: 1; visibility: visible; }
+    .video-modal-box {
+      width: 100%; max-width: 900px;
+      position: relative;
+      transform: translateY(20px) scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      cursor: default;
+    }
+    .video-modal.open .video-modal-box { transform: translateY(0) scale(1); }
+    .video-modal-inner {
+      width: 100%; aspect-ratio: 16 / 9;
+      border-radius: 20px; overflow: hidden;
+      background: #000;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+    }
+    .video-modal-inner iframe {
+      width: 100%; height: 100%; display: block; border: none;
+    }
+    .video-modal-close {
+      position: absolute; top: -56px; right: 0;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff; font-size: 1.4rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .video-modal-close:hover {
+      background: var(--accent); transform: rotate(90deg);
+    }
+    .video-modal-title {
+      color: #fff; font-size: 0.9rem;
+      margin-top: 16px; text-align: center;
+      opacity: 0.7; letter-spacing: 0.02em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      nav ul { gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+      nav a { font-size: 0.72rem; }
+      .hero, section, .contact {
+        padding-left: 24px; padding-right: 24px;
+      }
+      .about-grid { grid-template-columns: 1fr; gap: 28px; }
+      .about-photo-wrap { width: 160px; height: 160px; margin: 0 auto; }
+      .cv-btn {
+        margin: 20px auto 0; display: flex; justify-content: center;
+      }
+      .timeline-item {
+        grid-template-columns: 60px 1fr;
+        gap: 16px; row-gap: 4px;
+      }
+      .timeline-photo {
+        width: 60px; height: 60px;
+        border-radius: 14px; grid-row: span 2;
+      }
+      .timeline-year {
+        grid-column: 2; padding-top: 0; margin-bottom: 4px;
+      }
+      .timeline-content { grid-column: 2; }
+      .timeline-item.clickable::after { display: none; }
+      section { padding-top: 70px; padding-bottom: 70px; }
+      .lightbox { padding: 20px; }
+      .lightbox-close { top: 16px; right: 16px; width: 38px; height: 38px; }
+      .exp-modal { padding: 20px 16px; align-items: flex-end; }
+      .exp-modal-box {
+        padding: 36px 24px 28px;
+        border-radius: 24px 24px 0 0; max-height: 90vh;
+      }
+      .exp-modal-photo {
+        width: calc(100% + 48px);
+        margin: -36px -24px 20px -24px;
+        border-radius: 24px 24px 0 0;
+      }
+      .exp-modal-box h3 { font-size: 1.35rem; }
+      .exp-modal-close { top: 16px; right: 16px; }
+      .video-modal { padding: 20px 16px; }
+      .video-modal-close { top: -50px; width: 38px; height: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Oktavianta<span>.</span></div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#hobby">Hobby</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="reveal">Rendyarga <em>Oktavianta</em></h1>
+    <p class="reveal">Saya seorang kreator digital yang fokus pada desain minimalis, pengalaman pengguna, dan detail yang halus.</p>
+    <a href="#about" class="btn reveal">Kenali Saya →</a>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label reveal">About Me</p>
+    <h2 class="section-title reveal">Tentang Saya</h2>
+
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-photo-wrap">
+          <div class="about-photo">
+            <img src="rendy.jpeg" alt="Foto Rendyarga Oktavianta"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="fallback">👤</span>
+          </div>
+        </div>
+        <a href="cv.pdf" download class="cv-btn">📄 Download CV</a>
+      </div>
+
+      <div class="reveal">
+        <p class="highlight">Mahasiswa Teknologi Rekayasa Multimedia di PENS Surabaya.</p>
+      </div>
+
+      <div class="reveal">
+        <p>Seorang mahasiswa semester empat jurusan Teknologi Rekayasa Multimedia yang memiliki minat besar terhadap media digital, teknologi kreatif, dan pengembangan multimedia. Ia gemar mengeksplorasi berbagai aspek komunikasi visual, desain, dan media interaktif sembari terus mengasah keterampilan teknis maupun kreatifnya.</p>
+        <p>Di waktu luang, ia senang bermain bulu tangkis karena aktivitas ini membantunya tetap aktif, menjaga pola hidup sehat, serta menyegarkan pikiran setelah menjalani kegiatan akademik. Ia juga sangat antusias untuk mempelajari teknologi baru, berkolaborasi dalam proyek kreatif, dan menimba pengalaman yang dapat mendukung pengembangan diri serta kariernya.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="section-title reveal">Projects</h2>
+
+    <div class="projects">
+      <div class="card bg-cream reveal" data-caption="Workshop AR/VR">
+        <div class="card-image">
+          <img src="vr.jpeg" alt="Workshop AR/VR"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback">🥽</span>
+        </div>
+        <div class="card-body">
+          <p class="card-num">01</p>
+          <h3>Workshop AR/VR</h3>
+          <p>Workshop AR/VR adalah program pelatihan praktis yang dirancang untuk mengajari peserta cara merancang dan menguji aplikasi Augmented Reality (menambahkan elemen digital ke dunia nyata) serta Virtual Reality (menciptakan lingkungan digital yang sepenuhnya imersif).</p>
+          <div class="card-tags"><span class="tag">AR/VR</span></div>
+        </div>
+      </div>
+
+      <div class="card bg-sage reveal" data-caption="Web Teknologi">
+        <div class="card-image">
+          <img src="web.jpeg" alt="Web Teknologi"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback">🌐</span>
+        </div>
+        <div class="card-body">
+          <p class="card-num">02</p>
+          <h3>Web Teknologi</h3>
+          <p>Web teknologi (teknologi web) adalah keseluruhan ekosistem perangkat keras, perangkat lunak, protokol, standar, dan bahasa pemrograman yang digunakan untuk merancang, membangun, menjalankan, serta mengamankan situs web dan aplikasi berbasis web.</p>
+          <div class="card-tags"><span class="tag">Web Technology</span></div>
+        </div>
+      </div>
+
+      <div class="card bg-blue reveal" data-caption="Workshop Audio Visual Media">
+        <div class="card-image">
+          <img src="wavm.jpeg" alt="Workshop Audio Visual Media"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="fallback">🎬</span>
+        </div>
+        <div class="card-body">
+          <p class="card-num">03</p>
+          <h3>Workshop Audio Visual Media</h3>
+          <p>Workshop Audio Visual Media adalah program pelatihan praktis dan interaktif yang dirancang untuk mengajari peserta teknik produksi konten yang menggabungkan elemen suara (audio) dan gambar bergerak (visual).</p>
+          <div class="card-tags">
+            <span class="tag">Audio Visual</span>
+            <span class="tag">Media</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label reveal">Education</p>
+    <h2 class="section-title reveal">Pendidikan</h2>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-photo">
+          <img src="pens.jpg" alt="Logo PENS"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="fallback" style="display:none;">🎓</span>
+        </div>
+        <div class="timeline-year">2024 — Sekarang</div>
+        <div class="timeline-content">
+          <h3>D4 Teknologi Rekayasa Multimedia</h3>
+          <p class="place">Politeknik Elektronika Negeri Surabaya, Surabaya</p>
+          <p>Fokus pada multimedia, animasi, dan desain interaktif.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-photo">
+          <img src="images.jpg" alt="Logo SMA"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="fallback" style="display:none;">🏫</span>
+        </div>
+        <div class="timeline-year">2021 — 2024</div>
+        <div class="timeline-content">
+          <h3>SMA Jurusan IPA</h3>
+          <p class="place">SMAN 5 Tambun Selatan, Bekasi</p>
+          <p>Aktif di kegiatan sekolah dan mulai tertarik pada dunia desain digital.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label reveal">Experience</p>
+    <h2 class="section-title reveal">Pengalaman</h2>
+
+    <div class="timeline">
+      <div class="timeline-item reveal clickable"
+           data-year="2024"
+           data-title="Anggota Divisi Logistik"
+           data-place="Immersive Fiesta 2024"
+           data-photo="if.jpeg"
+           data-desc="Menjadi bagian dari divisi logistik pada acara Immersive Fiesta 2024."
+           data-list="Mengatur kebutuhan perlengkapan acara|Berkoordinasi dengan divisi lain untuk kelancaran event|Membantu persiapan dan penataan venue|Menjaga kelancaran operasional selama acara berlangsung">
+        <div class="timeline-photo">
+          <img src="if logo.jpg" alt="Logo Immersive Fiesta"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="fallback" style="display:none;">💼</span>
+        </div>
+        <div class="timeline-year">2024</div>
+        <div class="timeline-content">
+          <h3>Anggota Divisi Logistik</h3>
+          <p class="place">Immersive Fiesta 2024</p>
+          <p>Menjadi bagian dari divisi logistik pada Immersive Fiesta 2024.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal clickable"
+           data-year="2026"
+           data-title="Anggota Divisi Logistik OPP HIMA MMB 2026"
+           data-place="OPP HIMA MMB 2026"
+           data-photo="mmb.png"
+           data-desc="Berperan aktif dalam divisi logistik, bertanggung jawab atas seluruh kebutuhan alat selama acara berlangsung."
+           data-list="Menyiapkan perlengkapan dan kebutuhan acara|Membantu penataan venue|Membantu menjaga kelancaran selama acara berlangsung">
+        <div class="timeline-photo">
+          <img src="hima.png" alt="Logo OPP HIMA MMB"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="fallback" style="display:none;">🚀</span>
+        </div>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-content">
+          <h3>Anggota Divisi Logistik</h3>
+          <p class="place">OPP HIMA MMB 2026</p>
+          <p>Bertanggung jawab atas seluruh kebutuhan alat selama acara berlangsung.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal clickable"
+           data-year="2026"
+           data-title="Anggota Divisi Mobilisasi Kegiatan Prodi 2026"
+           data-place="Kegiatan Prodi 2026"
+           data-photo="kp.png"
+           data-desc="Bertanggung jawab dalam registrasi peserta dan perizinan ke dosen."
+           data-list="Mengurus absensi peserta|Melakukan mobilisasi ke peserta|Mengurus perizinan ke dosen">
+        <div class="timeline-photo">
+          <img src="kp-logo.jpg" alt="Logo Kegiatan Prodi"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span class="fallback" style="display:none;">📋</span>
+        </div>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-content">
+          <h3>Anggota Divisi Mobilisasi</h3>
+          <p class="place">Kegiatan Prodi 2026</p>
+          <p>Bertanggung jawab dalam registrasi peserta dan perizinan ke dosen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBY -->
+  <section id="hobby">
+    <p class="section-label reveal">Hobby</p>
+    <h2 class="section-title reveal">Yang Saya Nikmati</h2>
+
+    <div class="hobby-grid">
+      <div class="hobby-card reveal">
+        <span class="hobby-icon">🏸</span>
+        <h4>Bulu Tangkis</h4>
+        <p></p>
+      </div>
+
+      <!-- HOBBY SEPAK BOLA — KLIK UNTUK PUTAR VIDEO -->
+      <div class="hobby-card reveal playable" id="hobbySepakBola"
+           data-video="78Q10-BIfZE?si=OdoKElO8kL1Dt0rk">
+        <span class="hobby-icon">⚽</span>
+        <h4>Sepak Bola</h4>
+        <p> Klik untuk memutar ⚽</p>
+      </div>
+
+      <!-- HOBBY MUSIK — KLIK UNTUK PUTAR VIDEO -->
+      <div class="hobby-card reveal playable" id="hobbyMusik"
+           data-video="diSqcj75XDk">
+        <span class="hobby-icon">🎧</span>
+        <h4>Musik</h4>
+        <p> Klik untuk memutar 🎵</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact" id="contact">
+    <p class="section-label reveal" style="text-align:center;">Contact</p>
+    <h2 class="reveal">Mari <em>berkolaborasi.</em></h2>
+    <p class="reveal">Punya proyek menarik atau sekadar ingin menyapa? Saya selalu terbuka.</p>
+
+    <div class="contact-links reveal">
+      <a href="mailto:oktavianta25@gmail.com" class="primary">✉ Email Saya</a>
+      <a href="https://www.linkedin.com/in/rendyarga-oktavianta/" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/rendyarga25_" target="_blank">Instagram</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Rendyarga Oktavianta. Dibuat dengan tenang.
+  </footer>
+
+  <!-- VIDEO MODAL (muncul saat card hobby playable dipencet) -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-box">
+      <button class="video-modal-close" aria-label="Tutup">&times;</button>
+      <div class="video-modal-inner">
+        <iframe id="videoFrame" src=""
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen></iframe>
+      </div>
+      <p class="video-modal-title" id="videoModalTitle">🎬 Now Playing</p>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX (PROJECT) -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Tutup">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Preview">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <!-- EXPERIENCE MODAL -->
+  <div class="exp-modal" id="expModal">
+    <div class="exp-modal-box">
+      <button class="exp-modal-close" aria-label="Tutup">&times;</button>
+      <div class="exp-modal-photo">
+        <img id="expModalPhoto" src="" alt="Foto pengalaman"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="photo-fallback">📷</span>
+      </div>
+      <p class="exp-modal-year" id="expModalYear"></p>
+      <h3 id="expModalTitle"></h3>
+      <p class="exp-modal-place" id="expModalPlace"></p>
+      <p class="exp-modal-desc" id="expModalDesc"></p>
+      <ul class="exp-modal-list" id="expModalList"></ul>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    /* ====== ANIMASI SCROLL REVEAL ====== */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('active');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach((el) => observer.observe(el));
+
+    /* ====== LIGHTBOX PROJECT ====== */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('.card-image img');
+        const caption = card.getAttribute('data-caption') || '';
+        if (!img || img.style.display === 'none' || !img.src) return;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+    /* ====== EXPERIENCE MODAL ====== */
+    const expModal = document.getElementById('expModal');
+    const expModalYear = document.getElementById('expModalYear');
+    const expModalTitle = document.getElementById('expModalTitle');
+    const expModalPlace = document.getElementById('expModalPlace');
+    const expModalDesc = document.getElementById('expModalDesc');
+    const expModalList = document.getElementById('expModalList');
+    const expModalPhoto = document.getElementById('expModalPhoto');
+    const expPhotoFallback = expModal.querySelector('.photo-fallback');
+    const expCloseBtn = expModal.querySelector('.exp-modal-close');
+
+    document.querySelectorAll('.timeline-item.clickable').forEach((item) => {
+      item.addEventListener('click', () => {
+        const year = item.getAttribute('data-year') || '';
+        const title = item.getAttribute('data-title') || '';
+        const place = item.getAttribute('data-place') || '';
+        const desc = item.getAttribute('data-desc') || '';
+        const list = item.getAttribute('data-list') || '';
+        const photo = item.getAttribute('data-photo') || '';
+
+        expModalYear.textContent = year;
+        expModalTitle.textContent = title;
+        expModalPlace.textContent = place;
+        expModalDesc.textContent = desc;
+
+        if (photo) {
+          expModalPhoto.src = photo;
+          expModalPhoto.alt = title;
+          expModalPhoto.style.display = 'block';
+          expPhotoFallback.style.display = 'none';
+        } else {
+          expModalPhoto.style.display = 'none';
+          expPhotoFallback.style.display = 'flex';
+        }
+
+        expModalList.innerHTML = '';
+        if (list) {
+          list.split('|').forEach((li) => {
+            const liEl = document.createElement('li');
+            liEl.textContent = li.trim();
+            expModalList.appendChild(liEl);
+          });
+        }
+
+        expModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeExpModal() {
+      expModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    expCloseBtn.addEventListener('click', (e) => { e.stopPropagation(); closeExpModal(); });
+    expModal.addEventListener('click', (e) => { if (e.target === expModal) closeExpModal(); });
+
+    /* ============================================================
+       VIDEO MODAL — muncul saat card HOBBY dengan class "playable" dipencet
+       ------------------------------------------------------------
+       Cara ganti video: edit atribut data-video di HTML
+       ============================================================ */
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const videoModalTitle = document.getElementById('videoModalTitle');
+    const videoCloseBtn = videoModal.querySelector('.video-modal-close');
+
+    let currentPlayingCard = null;
+
+    function openVideoModal(videoId, title) {
+      videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+      videoModalTitle.textContent = title || '🎬 Now Playing';
+      videoModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      videoFrame.src = '';
+      videoModal.classList.remove('open');
+      document.body.style.overflow = '';
+      if (currentPlayingCard) {
+        currentPlayingCard.classList.remove('playing');
+        currentPlayingCard = null;
+      }
+    }
+
+    document.querySelectorAll('.hobby-card.playable').forEach((card) => {
+      card.addEventListener('click', () => {
+        if (videoModal.classList.contains('open')) {
+          closeVideoModal();
+          return;
+        }
+
+        const videoId = card.getAttribute('data-video');
+        if (!videoId) return;
+
+        const title = card.querySelector('h4')?.textContent || '';
+        currentPlayingCard = card;
+        card.classList.add('playing');
+
+        openVideoModal(videoId, '🎬 ' + title);
+      });
+    });
+
+    videoCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeVideoModal();
+    });
+
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeVideoModal();
+    });
+
+    /* ====== ESC UNTUK SEMUA MODAL ====== */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeExpModal();
+        closeVideoModal();
+      }
+    });
+  </script>
+
+</body>
+</html>
