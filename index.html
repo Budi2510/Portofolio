@@ -589,7 +589,7 @@
             <span class="fallback">👤</span>
           </div>
         </div>
-        <a href="CV_Rendyarga.pdf" download class="cv-btn">📄 Download CV</a>
+        <a href="CV_Rendyarga.pdf" download="CV_Rendyarga.pdf" class="cv-btn">📄 Download CV</a>
       </div>
 
       <div class="reveal">
@@ -774,10 +774,10 @@
 
       <!-- HOBBY SEPAK BOLA — KLIK UNTUK PUTAR VIDEO -->
       <div class="hobby-card reveal playable" id="hobbySepakBola"
-           data-video="78Q10-BIfZE?si=OdoKElO8kL1Dt0rk">
+           data-video="78Q10-BIfZE">
         <span class="hobby-icon">⚽</span>
         <h4>Sepak Bola</h4>
-        <p> Klik untuk memutar ⚽</p>
+        <p>Klik untuk memutar ⚽</p>
       </div>
 
       <!-- HOBBY MUSIK — KLIK UNTUK PUTAR VIDEO -->
@@ -785,7 +785,7 @@
            data-video="diSqcj75XDk">
         <span class="hobby-icon">🎧</span>
         <h4>Musik</h4>
-        <p> Klik untuk memutar 🎵</p>
+        <p>Klik untuk memutar 🎵</p>
       </div>
     </div>
   </section>
@@ -808,7 +808,7 @@
     © 2025 Rendyarga Oktavianta. Dibuat dengan tenang.
   </footer>
 
-  <!-- VIDEO MODAL (muncul saat card hobby playable dipencet) -->
+  <!-- VIDEO MODAL -->
   <div class="video-modal" id="videoModal">
     <div class="video-modal-box">
       <button class="video-modal-close" aria-label="Tutup">&times;</button>
@@ -947,8 +947,6 @@
 
     /* ============================================================
        VIDEO MODAL — muncul saat card HOBBY dengan class "playable" dipencet
-       ------------------------------------------------------------
-       Cara ganti video: edit atribut data-video di HTML
        ============================================================ */
     const videoModal = document.getElementById('videoModal');
     const videoFrame = document.getElementById('videoFrame');
